@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Prakhar — Data Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080B10;--bg2:#0D1117;--surface:#111720;--surface2:#161E2B;
+  --ink:#E8EDF5;--ink2:#8A94A6;--ink3:#3A4558;
+  --accent:#4F9EFF;--gold:#F5C842;
+  --border:rgba(255,255,255,0.08);--glow:rgba(79,158,255,0.18);
+  --shadow:0 4px 32px rgba(0,0,0,0.5);
+  --nav-bg:rgba(8,11,16,0.82);
+  --sky:linear-gradient(90deg,#162040,#0d1a33);
+  --knob-bg:radial-gradient(circle at 35% 35%,#93C5FD,#1E40AF);
+  --knob-sh:0 2px 10px rgba(30,64,175,0.7);
+  --knob-x:4px;
+}
+.lm{
+  --bg:#F4F1EB;--bg2:#EDE9E0;--surface:#FFFFFF;--surface2:#F2EFE8;
+  --ink:#1C1917;--ink2:#6B6660;--ink3:#C0BAB3;
+  --accent:#D4521A;--gold:#C9860F;
+  --border:rgba(0,0,0,0.09);--glow:rgba(212,82,26,0.12);
+  --shadow:0 4px 24px rgba(0,0,0,0.09);
+  --nav-bg:rgba(244,241,235,0.88);
+  --sky:linear-gradient(90deg,#87CEEB,#b8e0f5);
+  --knob-bg:radial-gradient(circle at 35% 35%,#FDE68A,#F59E0B);
+  --knob-sh:0 2px 12px rgba(245,158,11,0.7);
+  --knob-x:38px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;overflow-x:hidden;transition:background .45s ease,color .45s ease}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:var(--nav-bg);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);transition:background .45s ease,border-color .45s ease}
+.logo{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--ink);text-decoration:none;cursor:pointer;transition:color .45s ease}
+.logo b{color:var(--accent);font-weight:400;transition:color .45s ease}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:.78rem;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--ink2);text-decoration:none;cursor:pointer;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.tog{position:relative;width:68px;height:32px;border-radius:100px;border:1.5px solid var(--border);cursor:pointer;overflow:hidden;flex-shrink:0;transition:border-color .4s ease,box-shadow .3s}
+.tog:hover{box-shadow:0 0 0 4px var(--glow)}
+.tog-sky{position:absolute;inset:0;border-radius:100px;background:var(--sky);transition:background .45s ease}
+.tog-dots{position:absolute;inset:0;display:flex;align-items:center;padding-left:9px;gap:4px;transition:opacity .3s}
+.tog-dot{width:2.5px;height:2.5px;border-radius:50%;background:#fff}
+.tog-dot:nth-child(1){width:3.5px;height:3.5px;opacity:.95}
+.tog-dot:nth-child(2){opacity:.55;margin-top:-5px}
+.tog-dot:nth-child(3){opacity:.35;margin-top:4px}
+.lm .tog-dots{opacity:0}
+.tog-rays{position:absolute;inset:0;display:flex;align-items:center;padding-left:8px;gap:2px;opacity:0;transition:opacity .3s}
+.tog-ray{width:2px;height:6px;border-radius:2px;background:#FCD34D}
+.lm .tog-rays{opacity:1}
+.tog-knob{position:absolute;top:3px;left:var(--knob-x);width:24px;height:24px;border-radius:50%;background:var(--knob-bg);box-shadow:var(--knob-sh);display:flex;align-items:center;justify-content:center;font-size:12px;z-index:2;transition:left .45s cubic-bezier(.34,1.56,.64,1),background .45s ease,box-shadow .45s ease}
+#hero{min-height:100vh;display:grid;grid-template-columns:54% 46%;padding-top:4rem;position:relative;overflow:hidden}
+.hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,var(--glow) 0%,transparent 70%);top:-120px;right:-120px;pointer-events:none;transition:background .5s ease}
+.hero-left{padding:5rem 3.5rem 4rem;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
+.chip{display:inline-flex;align-items:center;gap:.5rem;background:var(--surface);border:1px solid var(--border);padding:.38rem 1rem;border-radius:100px;font-size:.72rem;font-weight:500;letter-spacing:.07em;color:var(--accent);text-transform:uppercase;width:fit-content;margin-bottom:1.8rem;transition:background .45s ease,border-color .45s ease,color .45s ease}
+.chip-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-name{font-family:'Playfair Display',serif;font-size:clamp(3.5rem,5.8vw,7rem);line-height:.95;letter-spacing:-.03em;color:var(--ink);transition:color .45s ease}
+.name-grad{display:block;background:linear-gradient(125deg,var(--accent) 0%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{margin-top:1.8rem;font-size:1rem;font-weight:300;color:var(--ink2);max-width:400px;line-height:1.85;transition:color .45s ease}
+.hero-btns{margin-top:2.5rem;display:flex;gap:1rem;flex-wrap:wrap}
+.btn-a{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;padding:.85rem 2rem;border-radius:6px;font-size:.9rem;font-weight:600;text-decoration:none;cursor:pointer;box-shadow:0 0 22px var(--glow);transition:transform .2s,box-shadow .2s,background .45s ease}
+.btn-a:hover{transform:translateY(-3px);box-shadow:0 0 40px var(--glow)}
+.btn-b{display:inline-flex;align-items:center;gap:.5rem;border:1.5px solid var(--border);color:var(--ink2);padding:.85rem 2rem;border-radius:6px;font-size:.9rem;font-weight:500;text-decoration:none;cursor:pointer;transition:border-color .2s,color .2s,transform .2s}
+.btn-b:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px)}
+.hero-right{display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
+.orb-wrap{position:relative;width:360px;height:360px}
+.orb{position:absolute;border-radius:50%;border:1px solid var(--border);background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:background .45s ease,border-color .45s ease,box-shadow .3s}
+.orb:hover{box-shadow:0 0 40px var(--glow)}
+.orb-a{width:170px;height:170px;top:10px;left:90px;animation:fa 5s ease-in-out infinite}
+.orb-b{width:132px;height:132px;bottom:20px;left:8px;animation:fb 6.5s ease-in-out infinite .4s}
+.orb-c{width:114px;height:114px;bottom:48px;right:4px;animation:fa 7s ease-in-out infinite .9s}
+@keyframes fa{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+@keyframes fb{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+.orb-n{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;line-height:1;background:linear-gradient(125deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.orb-b .orb-n,.orb-c .orb-n{font-size:1.5rem}
+.orb-l{font-size:.67rem;color:var(--ink2);font-weight:500;margin-top:.25rem;letter-spacing:.05em;text-transform:uppercase;transition:color .45s ease}
+.sec{padding:5.5rem 3rem;position:relative;z-index:1}
+.inner{max-width:1080px;margin:0 auto}
+.sec-tag{font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem;transition:color .45s ease}
+.sec-h{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,2.8vw,2.7rem);letter-spacing:-.02em;line-height:1.15;margin-bottom:2.5rem;transition:color .45s ease}
+#about{background:var(--bg2);border-top:1px solid var(--border);transition:background .45s ease,border-color .45s ease}
+.about-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:5rem;align-items:start}
+.about-body p{color:var(--ink2);font-weight:300;line-height:1.85;margin-bottom:1rem;transition:color .45s ease}
+.socials{margin-top:1.8rem;display:flex;gap:.75rem;flex-wrap:wrap}
+.soc-a{display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:500;color:var(--ink2);text-decoration:none;padding:.52rem 1rem;border:1px solid var(--border);border-radius:5px;cursor:pointer;transition:border-color .2s,color .2s,background .2s}
+.soc-a:hover{border-color:var(--accent);color:var(--accent);background:var(--glow)}
+#skills{border-top:1px solid var(--border);transition:border-color .45s ease}
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.1rem}
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.5rem;transition:background .45s ease,border-color .25s,transform .2s,box-shadow .25s}
+.sc:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:var(--shadow)}
+.sc h4{font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem;transition:color .45s ease}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.tag{background:var(--surface2);color:var(--ink2);font-size:.79rem;padding:.28rem .72rem;border-radius:4px;border:1px solid var(--border);transition:background .45s ease,color .45s ease,border-color .45s ease}
+.cert{margin-top:1.4rem;display:inline-flex;align-items:center;gap:.7rem;background:var(--surface);border:1px solid var(--border);padding:.85rem 1.3rem;border-radius:8px;font-size:.87rem;font-weight:500;transition:background .45s ease,border-color .45s ease}
+#projects{background:var(--bg2);border-top:1px solid var(--border);transition:background .45s ease,border-color .45s ease}
+.proj-list{display:flex;flex-direction:column;gap:1rem}
+.proj{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.8rem 2rem;display:grid;grid-template-columns:48px 1fr 28px;gap:1.3rem;align-items:center;text-decoration:none;color:inherit;transition:background .45s ease,border-color .22s,transform .22s,box-shadow .22s}
+.proj:hover{border-color:var(--accent);transform:translateX(6px);box-shadow:var(--shadow)}
+.proj-n{font-family:'Playfair Display',serif;font-size:2rem;color:var(--ink3);line-height:1;transition:color .22s}
+.proj:hover .proj-n{color:var(--accent)}
+.proj-title{font-family:'Playfair Display',serif;font-size:1.15rem;margin-bottom:.45rem;transition:color .45s ease}
+.proj-pills{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.75rem}
+.pill{font-size:.68rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;background:var(--glow);color:var(--accent);padding:.2rem .6rem;border-radius:3px;transition:background .45s ease,color .45s ease}
+.proj-desc{font-size:.87rem;color:var(--ink2);font-weight:300;line-height:1.7;transition:color .45s ease}
+.proj-arr{font-size:1.2rem;color:var(--ink3);transition:transform .2s,color .2s}
+.proj:hover .proj-arr{transform:translateX(4px);color:var(--accent)}
+#education{border-top:1px solid var(--border);transition:border-color .45s ease}
+.etl{position:relative;padding-left:2rem}
+.etl::before{content:'';position:absolute;left:5px;top:8px;bottom:8px;width:1.5px;background:var(--border);transition:background .45s ease}
+.ei{position:relative;padding:1.5rem 0 1.5rem 1.5rem;border-bottom:1px solid var(--border);transition:border-color .45s ease}
+.ei:last-child{border-bottom:none}
+.ei::before{content:'';position:absolute;left:0;top:1.9rem;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--ink3);transition:border-color .3s,background .3s}
+.ei:hover::before{border-color:var(--accent);background:var(--accent)}
+.ei-yr{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.25rem;transition:color .45s ease}
+.ei-deg{font-weight:600;font-size:.97rem;transition:color .45s ease}
+.ei-sch{font-size:.86rem;color:var(--ink2);font-weight:300;margin-top:.1rem;transition:color .45s ease}
+.ei-sc{display:inline-block;margin-top:.45rem;font-size:.76rem;font-weight:500;color:var(--gold);background:var(--surface);border:1px solid var(--border);padding:.18rem .65rem;border-radius:3px;transition:all .45s ease}
+#contact{background:var(--bg2);border-top:1px solid var(--border);text-align:center;transition:background .45s ease,border-color .45s ease}
+.c-h{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.8vw,3.8rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:.9rem;transition:color .45s ease}
+.c-h em{font-style:italic;background:linear-gradient(125deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.c-sub{color:var(--ink2);font-weight:300;margin-bottom:2.5rem;transition:color .45s ease}
+.c-row{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap}
+.c-a{display:inline-flex;align-items:center;gap:.55rem;border:1px solid var(--border);color:var(--ink2);padding:.82rem 1.5rem;border-radius:7px;font-size:.87rem;font-weight:500;text-decoration:none;cursor:pointer;transition:border-color .2s,color .2s,background .2s,transform .2s}
+.c-a:hover{border-color:var(--accent);color:var(--accent);background:var(--glow);transform:translateY(-2px)}
+.foot{margin-top:3.5rem;font-size:.73rem;color:var(--ink3);transition:color .45s ease}
+#rpl{position:fixed;inset:0;z-index:9999;pointer-events:none;overflow:hidden}
+@media(max-width:900px){nav{padding:1rem 1.5rem}#hero{grid-template-columns:1fr}.hero-left{padding:5.5rem 1.5rem 3rem}.hero-right{display:none}.sec{padding:4rem 1.5rem}.about-grid{grid-template-columns:1fr;gap:2rem}.proj{grid-template-columns:44px 1fr}.proj-arr{display:none}}
+@media(max-width:600px){.nav-links{display:none}}
+</style>
+</head>
+<body>
+<div id="rpl"></div>
+<nav>
+  <a class="logo" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})">Prakhar<b>.</b></a>
+  <ul class="nav-links">
+    <li><a onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">About</a></li>
+    <li><a onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth'})">Skills</a></li>
+    <li><a onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">Projects</a></li>
+    <li><a onclick="document.getElementById('education').scrollIntoView({behavior:'smooth'})">Education</a></li>
+    <li><a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact</a></li>
+  </ul>
+  <div class="tog" id="tog" onclick="(function(){var b=document.body,k=document.getElementById('knob'),r=document.getElementById('rpl'),t=document.getElementById('tog'),lm=b.classList.contains('lm'),next=!lm,rect=t.getBoundingClientRect(),cx=rect.left+rect.width/2,cy=rect.top+rect.height/2,maxR=Math.hypot(Math.max(cx,window.innerWidth-cx),Math.max(cy,window.innerHeight-cy))*2.2,fill=next?'#F4F1EB':'#080B10',c=document.createElement('div');c.style.cssText='position:absolute;border-radius:50%;width:'+maxR+'px;height:'+maxR+'px;top:'+(cy-maxR/2)+'px;left:'+(cx-maxR/2)+'px;background:'+fill+';transform:scale(0);transition:transform 0.82s cubic-bezier(0.22,1,0.36,1)';r.appendChild(c);requestAnimationFrame(function(){requestAnimationFrame(function(){c.style.transform='scale(1)'})});setTimeout(function(){if(next){b.classList.add('lm')}else{b.classList.remove('lm')};if(k)k.textContent=next?'☀️':'🌙'},400);setTimeout(function(){c.style.transition='transform 0.82s cubic-bezier(0.22,1,0.36,1),opacity 0.3s ease';c.style.opacity='0'},720);setTimeout(function(){if(c.parentNode)c.parentNode.removeChild(c)},1100)})()">
+    <div class="tog-sky"></div>
+    <div class="tog-dots"><div class="tog-dot"></div><div class="tog-dot"></div><div class="tog-dot"></div></div>
+    <div class="tog-rays"><div class="tog-ray"></div><div class="tog-ray"></div><div class="tog-ray"></div></div>
+    <div class="tog-knob" id="knob">🌙</div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-left">
+    <div class="chip"><span class="chip-dot"></span>Available for internship</div>
+    <h1 class="hero-name">Hello, I'm<br><span class="name-grad">Prakhar</span></h1>
+    <p class="hero-sub">Data Analyst — I turn 500K+ records into clear decisions. Fluent in SQL, Power BI, Python &amp; Excel. Numbers tell stories; I translate them.</p>
+    <div class="hero-btns">
+      <a class="btn-a" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">See My Work →</a>
+      <a class="btn-b" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Let's Talk</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="orb-wrap">
+      <div class="orb orb-a"><div class="orb-n">500K+</div><div class="orb-l">Records<br>Analyzed</div></div>
+      <div class="orb orb-b"><div class="orb-n">3</div><div class="orb-l">Live<br>Projects</div></div>
+      <div class="orb orb-c"><div class="orb-n">8+</div><div class="orb-l">Students<br>Tutored</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="sec">
+  <div class="inner">
+    <div class="about-grid">
+      <div>
+        <p class="sec-tag">About Me</p>
+        <h2 class="sec-h">Analyst by craft,<br><em style="font-style:italic;color:var(--accent)">communicator</em><br>by nature.</h2>
+      </div>
+      <div class="about-body">
+        <p>I'm a Data Analyst certified by Google, with hands-on experience turning messy datasets into dashboards and decisions. I've worked across e-commerce and mobility domains — from sales funnels to bike-share rider behavior.</p>
+        <p>For two years I taught Mathematics, Science &amp; CS to 8+ students with 100% retention. I know how to take something complex and make it immediately clear — a skill I bring to every report and presentation.</p>
+        <p>Currently pursuing my MCA at Manipal University Jaipur. Actively seeking a Data or Business Analyst internship.</p>
+        <div class="socials">
+          <a class="soc-a" href="https://www.linkedin.com/in/mr-prakhar" target="_blank">↗ LinkedIn</a>
+          <a class="soc-a" href="https://github.com/prakhar6585" target="_blank">↗ GitHub</a>
+          <a class="soc-a" href="https://mail.google.com/mail/?view=cm&to=shrivastavprakhar71@gmail.com" target="_blank">✉ Email</a>
+          <a class="soc-a" href="tel:+918474996585">📞 Call</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="sec">
+  <div class="inner">
+    <p class="sec-tag">Technical Stack</p>
+    <h2 class="sec-h">Skills &amp; Tools</h2>
+    <div class="sg">
+      <div class="sc"><h4>BI &amp; Visualization</h4><div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Power Query</span><span class="tag">Google Sheets</span></div></div>
+      <div class="sc"><h4>Spreadsheets</h4><div class="tags"><span class="tag">Excel</span><span class="tag">Pivot Tables</span><span class="tag">VLOOKUP</span><span class="tag">Conditional Formatting</span></div></div>
+      <div class="sc"><h4>Programming</h4><div class="tags"><span class="tag">Python</span><span class="tag">pandas</span><span class="tag">NumPy</span><span class="tag">SQL</span></div></div>
+      <div class="sc"><h4>Analytics</h4><div class="tags"><span class="tag">EDA</span><span class="tag">Data Cleaning</span><span class="tag">KPI Tracking</span><span class="tag">BI Reporting</span><span class="tag">Statistical Analysis</span></div></div>
+    </div>
+    <div class="cert">🏅 <strong>Google Data Analytics Professional Certificate</strong> &nbsp;·&nbsp; Coursera, 2024</div>
+  </div>
+</section>
+
+<section id="projects" class="sec">
+  <div class="inner">
+    <p class="sec-tag">Selected Work</p>
+    <h2 class="sec-h">Projects</h2>
+    <div class="proj-list">
+      <a class="proj" href="https://github.com/prakhar6585/E-Commerce-Sales-Dashboard" target="_blank">
+        <div class="proj-n">01</div>
+        <div><div class="proj-title">Power BI Sales Dashboard</div><div class="proj-pills"><span class="pill">Power BI</span><span class="pill">DAX</span><span class="pill">Power Query</span></div><div class="proj-desc">Analyzed 500K+ records across 6 categories. Top 3 segments = 68% of revenue. Replaced static Excel with a live real-time dashboard via Power Query.</div></div>
+        <div class="proj-arr">→</div>
+      </a>
+      <a class="proj" href="https://docs.google.com/spreadsheets/d/1OSTRtXXyu0Ok6SFeHjCrxstOHWoLmKMHQBWEvYVcaXI/edit?usp=sharing" target="_blank">
+        <div class="proj-n">02</div>
+        <div><div class="proj-title">E-Commerce Customer Journey</div><div class="proj-pills"><span class="pill">Excel</span><span class="pill">Pivot Tables</span><span class="pill">EDA</span></div><div class="proj-desc">50K+ customer records across 5 funnel stages. Mobile users convert 34% lower than desktop — key insight for retargeting strategy.</div></div>
+        <div class="proj-arr">→</div>
+      </a>
+      <a class="proj" href="https://docs.google.com/spreadsheets/d/1XdrrkAKLIp1KiD_KIOGfCy9YFD4migGt5T_ZrHhpBxM/edit?usp=sharing" target="_blank">
+        <div class="proj-n">03</div>
+        <div><div class="proj-title">Cyclistic Bike-Share Analysis</div><div class="proj-pills"><span class="pill">Excel</span><span class="pill">Google Sheets</span><span class="pill">Data Storytelling</span></div><div class="proj-desc">200K+ ride records. Weekend casuals = 62% of non-members — primary conversion target. Three data-backed membership strategies proposed.</div></div>
+        <div class="proj-arr">→</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="education" class="sec">
+  <div class="inner">
+    <p class="sec-tag">Academic Background</p>
+    <h2 class="sec-h">Education</h2>
+    <div class="etl">
+      <div class="ei"><div class="ei-yr">2025 — Ongoing</div><div class="ei-deg">MCA — Master of Computer Applications</div><div class="ei-sch">Manipal University Jaipur</div></div>
+      <div class="ei"><div class="ei-yr">2019 — 2023</div><div class="ei-deg">BCA — Bachelor of Computer Applications</div><div class="ei-sch">Apex Institute of Technology, MJPRU</div></div>
+      <div class="ei"><div class="ei-yr">Class 12</div><div class="ei-deg">PCM — Science Stream</div><div class="ei-sch">GND Public School</div><span class="ei-sc">Score: 78%</span></div>
+      <div class="ei"><div class="ei-yr">Class 10</div><div class="ei-deg">Secondary School</div><div class="ei-sch">GND Public School</div><span class="ei-sc">CGPA: 10 / 10</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="sec">
+  <div class="inner">
+    <h2 class="c-h">Let's build something<br><em>together.</em></h2>
+    <p class="c-sub">Open to Data &amp; Business Analyst internships. Drop me a message.</p>
+    <div class="c-row">
+      <a class="c-a" href="https://mail.google.com/mail/?view=cm&to=shrivastavprakhar71@gmail.com" target="_blank">✉ shrivastavprakhar71@gmail.com</a>
+      <a class="c-a" href="tel:+918474996585">📞 +91 84749 96585</a>
+      <a class="c-a" href="https://www.linkedin.com/in/mr-prakhar" target="_blank">↗ LinkedIn</a>
+      <a class="c-a" href="https://github.com/prakhar6585" target="_blank">↗ GitHub</a>
+    </div>
+    <p class="foot">© 2025 Prakhar Shrivastav · Designed with intent.</p>
+  </div>
+</section>
+</body>
+</html>
